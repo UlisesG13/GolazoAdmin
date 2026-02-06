@@ -4,6 +4,5 @@ import com.ulisesg.admingolazo.freatures.domain.entities.Product
 
 data class ProductUiState(
     val isLoading: Boolean = false,
-    val cocktails: List<Product> = emptyList(),
     val error: String? = null
 )

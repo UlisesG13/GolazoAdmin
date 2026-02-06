@@ -13,7 +13,23 @@ fun ProductResponse.toDomain(): Product {
         precio = precio,
         imagenes = imagenes?.toDomain() ?: emptyList(),
         esDestacado = esta_destacado,
-        estaActivo = esta_activo
+        estaActivo = esta_activo,
+        fecha_creacion = fecha_creacion,
+        categoria_id = categoria_id
+    )
+}
+
+fun Product.toResponse(): ProductResponse {
+    return ProductResponse(
+        producto_id = if (id.isEmpty()) null else id,
+        nombre = nombre,
+        precio = precio,
+        descripcion = descripcion,
+        esta_activo = estaActivo,
+        esta_destacado = esDestacado,
+        categoria_id = categoria_id,
+        fecha_creacion = fecha_creacion,
+        imagenes = imagenes.map { ImageReponse(it.id, it.path, it.orden) }
     )
 }
 

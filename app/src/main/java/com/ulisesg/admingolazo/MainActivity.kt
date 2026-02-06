@@ -13,17 +13,15 @@ import com.ulisesg.admingolazo.ui.theme.AdminGolazoTheme
 
 class MainActivity : ComponentActivity() {
 
-    private lateinit var productViewModel: ProductViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Instanciamos los módulos para la inyección de dependencias
+        // Inicializamos las dependencias dentro de onCreate para mantenerlo simple
         val appContainer = AppContainer()
         val productModule = ProductModule(appContainer)
 
-        // Creamos el ViewModel usando su Factory
-        productViewModel = ViewModelProvider(
+        // Obtenemos el ViewModel usando su Factory centralizada que ya inyecta todos los Use Cases
+        val productViewModel = ViewModelProvider(
             this,
             productModule.providerProductViewModelFactory()
         )[ProductViewModel::class.java]
@@ -31,6 +29,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AdminGolazoTheme {
+                // Mostramos la pantalla principal con el ViewModel configurado
                 ProductScreen(viewModel = productViewModel)
             }
         }
