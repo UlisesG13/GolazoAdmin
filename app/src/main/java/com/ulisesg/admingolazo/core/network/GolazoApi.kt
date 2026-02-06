@@ -1,7 +1,10 @@
 package com.ulisesg.admingolazo.core.network
 
-import com.ulisesg.admingolazo.freatures.data.datasources.remote.model.ImageReponse
-import com.ulisesg.admingolazo.freatures.data.datasources.remote.model.ProductResponse
+import com.ulisesg.admingolazo.freatures.auth.data.remote.model.AuthResponse
+import com.ulisesg.admingolazo.freatures.auth.data.remote.model.LoginRequest
+import com.ulisesg.admingolazo.freatures.auth.data.remote.model.RegisterRequest
+import com.ulisesg.admingolazo.freatures.products.data.datasources.remote.model.ImageReponse
+import com.ulisesg.admingolazo.freatures.products.data.datasources.remote.model.ProductResponse
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -10,6 +13,13 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface GolazoApi {
+
+    @POST("api/auth/login")
+    suspend fun login(@Body request: LoginRequest): AuthResponse
+
+    @POST("api/users/")
+    suspend fun register(@Body request: RegisterRequest): AuthResponse
+
     @GET("api/productos/")
     suspend fun getProducts(): List<ProductResponse>
 
