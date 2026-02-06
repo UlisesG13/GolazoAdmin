@@ -8,18 +8,25 @@ data class LoginRequest(
 data class RegisterRequest(
     val nombre: String,
     val email: String,
-    val password: String,
-    val rol: String = "admin"
+    val password: String
 )
 
-data class AuthResponse(
-    val access_token: String,
-    val token_type: String,
-    val usuario: UserDto
+data class LoginResponseDto(
+    val token: String,
+    val usuario_id: String,
+    val email: String,
+    val rol: String
 )
 
-data class UserDto(
+data class UserResponse(
     val usuario_id: String,
     val nombre: String,
     val email: String,
+    val telefono: String?,
+    val rol: String?,
+    val fecha_creacion: String,
+    val is_authenticated: Boolean? = false,
+    val google_id: String? = null,
+    val password: String? = null,
+    val fecha_eliminacion: String? = null
 )

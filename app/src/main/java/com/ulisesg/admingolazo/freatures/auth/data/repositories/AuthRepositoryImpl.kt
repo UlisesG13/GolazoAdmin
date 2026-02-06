@@ -15,12 +15,12 @@ class AuthRepositoryImpl(
     override suspend fun login(email: String, password: String): Result<User> = withContext(Dispatchers.IO) {
         runCatching {
             val response = api.login(LoginRequest(email, password))
-            val usuario = response.usuario ?: throw Exception("Credenciales incorrectas")
+
             User(
-                id = usuario.usuario_id,
-                nombre = usuario.nombre,
-                email = usuario.email,
-                token = response.access_token
+                id = response.usuario_id,
+                nombre = response.email,
+                email = response.email,
+                token = response.token
             )
         }
     }
@@ -28,12 +28,12 @@ class AuthRepositoryImpl(
     override suspend fun register(nombre: String, email: String, password: String): Result<User> = withContext(Dispatchers.IO) {
         runCatching {
             val response = api.register(RegisterRequest(nombre, email, password))
-            val usuario = response.usuario ?: throw Exception("Error del servidor: Datos de usuario incompletos")
+
             User(
-                id = usuario.usuario_id,
-                nombre = usuario.nombre,
-                email = usuario.email,
-                token = response.access_token
+                id = response.usuario_id,
+                nombre = response.nombre,
+                email = response.email,
+                token = ""
             )
         }
     }

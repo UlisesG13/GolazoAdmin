@@ -1,8 +1,9 @@
 package com.ulisesg.admingolazo.core.network
 
-import com.ulisesg.admingolazo.freatures.auth.data.remote.model.AuthResponse
 import com.ulisesg.admingolazo.freatures.auth.data.remote.model.LoginRequest
+import com.ulisesg.admingolazo.freatures.auth.data.remote.model.LoginResponseDto
 import com.ulisesg.admingolazo.freatures.auth.data.remote.model.RegisterRequest
+import com.ulisesg.admingolazo.freatures.auth.data.remote.model.UserResponse
 import com.ulisesg.admingolazo.freatures.products.data.datasources.remote.model.ImageReponse
 import com.ulisesg.admingolazo.freatures.products.data.datasources.remote.model.ProductResponse
 import retrofit2.http.Body
@@ -14,11 +15,11 @@ import retrofit2.http.Path
 
 interface GolazoApi {
 
-    @POST("api/auth/login")
-    suspend fun login(@Body request: LoginRequest): AuthResponse
+    @POST("api/users/auth/login/")
+    suspend fun login(@Body request: LoginRequest): LoginResponseDto
 
     @POST("api/users/")
-    suspend fun register(@Body request: RegisterRequest): AuthResponse
+    suspend fun register(@Body request: RegisterRequest): UserResponse
 
     @GET("api/productos/")
     suspend fun getProducts(): List<ProductResponse>
